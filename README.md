@@ -59,7 +59,6 @@ go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 go install github.com/tomnomnom/assetfinder@latest
 go install github.com/projectdiscovery/chaos-client/v2/cmd/chaos@latest
 go install github.com/tomnomnom/alterx@latest
-
 ```
 # Author
 IceCream — Pentester • Recon Addict • Night City Netrunner

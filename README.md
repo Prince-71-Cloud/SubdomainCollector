@@ -22,23 +22,23 @@ by IceCream
 ```bash
 git clone https://github.com/yourusername/subdomain-collector.git
 cd subdomain-collector
-chmod +x subcollect.sh
+chmod +x collectSub.sh
 ```
 
 ## Usage
 ### Single or multiple domains
 ```
-./subcollect.sh tesla.com google.com apple.com microsoft.com
+./collectSub.sh tesla.com google.com apple.com microsoft.com
 ```
 
 ### From a file (one domain per line)
 ```
-./subcollect.sh -f domains.txt
+./collectSub.sh -f domains.txt
 ```
 
 ### Output Example
 ```
-Results saved in: /home/prince/Documents/Pentest/
+Results saved in: /PATH_TO_SAVE/
 
 ├── tesla.com/
 │   └── tesla.com.subdomains.txt        ← 2,156 subdomains

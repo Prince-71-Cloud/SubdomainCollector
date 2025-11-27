@@ -21,8 +21,8 @@ by IceCream
 
 ```bash
 git clone https://github.com/Prince-71-Cloud/SubdomainCollector.git
-cd subdomain-collector
-chmod +x collectSub.sh
+cd SubdomainCollector
+chmod +x SubdomainCollector
 ```
 
 ## Usage

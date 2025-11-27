@@ -20,9 +20,9 @@ by IceCream
 ## Installation
 
 ```bash
-git clone https://github.com/Prince-71-Cloud/SubdomainCollector.git
-cd SubdomainCollector
-chmod +x SubdomainCollector
+sudo git clone https://github.com/Prince-71-Cloud/SubdomainCollector.git
+sudo cd SubdomainCollector
+sudo chmod +x collectSub.sh
 ```
 
 ## Usage

@@ -4,8 +4,8 @@
 
 set -euo pipefail
 
-BASE="PATH/TO/SAVE/RESULTS"  # Replace with your desired base path
-CHAOS_KEY="CHAOS_API_KEY"  # Replace with your actual Chaos API key
+BASE="/home/prince/Documents/Pentest"  # Replace with your desired base path
+CHAOS_KEY="ec628c2d-2bab-4a07-b86d-24f1f6bdb673"  # Replace with your actual Chaos API key
 
 # Colors
 G="\033[0;32m"
@@ -45,6 +45,7 @@ for ((i=0; i<total; i++)); do
     folder="$BASE/$domain"
     mkdir -p "$folder"
 
+
     # Collect subdomains from all tools
     {
         subfinder -d "$domain" -all -recursive -silent 2>/dev/null || true
@@ -53,6 +54,22 @@ for ((i=0; i<total; i++)); do
         curl -sk "https://crt.sh/?q=%25.$domain&output=json" 2>/dev/null | \
             jq -r '.[].name_value' 2>/dev/null | sed 's/\*\.//g' | tr ' ' '\n' || true
         echo "$domain" | alterx -silent 2>/dev/null || true
+
+        # ☠️ HackerTarget
+        curl -s "https://api.hackertarget.com/hostsearch/?q=$domain" | cut -d',' -f1 2>/dev/null || true
+
+        # ☠️ RapidDNS
+        curl -s "https://rapiddns.io/subdomain/$domain?full=1" | grep -oP '(?<=target="_blank">)[^<]+' | grep "$domain" 2>/dev/null || true
+
+        # ☠️ Riddler.io
+        curl -s "https://riddler.io/search/exportcsv?q=pld:$domain" | grep -oP "\\b([a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+$domain\\b" 2>/dev/null || true
+
+        # ☠️ AlienVault OTX
+        curl -s "https://otx.alienvault.com/api/v1/indicators/domain/$domain/passive_dns" | jq -r '.passive_dns[].hostname' 2>/dev/null | sort -u || true
+
+        # ☠️ URLScan.io
+        curl -s "https://urlscan.io/api/v1/search/?q=domain:$domain" | jq -r '.results[].page.domain' 2>/dev/null | sort -u || true
+
     } 2>/dev/null | grep -v '^\[' | sort -u > "$folder/$domain.subdomains.txt"
 
     subs=$(wc -l < "$folder/$domain.subdomains.txt")
